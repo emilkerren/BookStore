@@ -1,6 +1,7 @@
 package com.bookies.DAL;
 
 import com.bookies.Models.Book;
+import com.bookies.Models.Item;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -15,9 +16,9 @@ import java.util.stream.Collectors;
  * Created by Emil on 2017-02-18.
  */
 public class DataAccessLayer {
-
-    public List<Book> getBooks() {
-        List<Book> bookList = new ArrayList<>();
+//    List<Book> bookList = new ArrayList<>();
+    private static List<Item> itemList = new ArrayList<>();
+    public List<Item> getBooks() {
         try {
             String pageText;
             URL url = new URL("http://www.contribe.se/bookstoredata/bookstoredata.txt");
@@ -34,15 +35,17 @@ public class DataAccessLayer {
                     book.setTitle(splittedLine[0]);
                     book.setAuthor(splittedLine[1]);
                     book.setPrice(convertToBigDecimal(splittedLine[2]));
-
-                    bookList.add(book);
+                    Item item = new Item();
+                    item.setItem(book);
+                    item.setQuantity(Integer.valueOf(splittedLine[3]));
+                    itemList.add(item);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return bookList;
+        return itemList;
     }
 
     private BigDecimal convertToBigDecimal(String s) {
@@ -51,4 +54,7 @@ public class DataAccessLayer {
         return bigDecimal;
     }
 
+    public static List<Item> getItemList() {
+        return itemList;
+    }
 }

@@ -2,21 +2,27 @@ package com.bookies.Models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Emil on 2017-02-18.
  */
 public class BookListModel implements BookList {
-
-    private List<Book> books;
-    public BookListModel(List<Book> books) {
-        this.books = books;
+    private List<Item> items;
+    private List<Book> bookList;
+    public BookListModel(List<Item> items) {
+        this.items = items;
+        this.bookList = items.stream()
+                .filter(element->element.getItem() instanceof Book)
+                .map(element->(Book)element.getItem())
+                .collect(Collectors.toList());
     }
 
     @Override
     public Book[] list(String searchString) {
         List<Book> foundBooks = new ArrayList<>();
-        for (Book book : books) {
+        for (Item item : items) {
+            Book book = (Book)item.getItem();
             if(book.getAuthor().equalsIgnoreCase(searchString)) {
                 foundBooks.add(book);
             }
@@ -29,16 +35,11 @@ public class BookListModel implements BookList {
         return booksArray;
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
-
     @Override
     public boolean add(Book book, int quantity) {
-        List<Book> extendedBookList = new ArrayList<>(getBooks());
+        List<Book> extendedBookList = new ArrayList<>(bookList);
         extendedBookList.add(book);
-
-        return false;
+        return true;
     }
 
     @Override
@@ -46,10 +47,22 @@ public class BookListModel implements BookList {
         int[] indexesOfBooksToBuy = new int[books.length];
         int i = 0;
         for (Book book : books) {
-            indexesOfBooksToBuy[i] = getBooks().indexOf(book);
+            indexesOfBooksToBuy[i] = bookList.indexOf(book);
             i++;
         }
-
+        int okToBuy = 0;
+        int notInStock = 1;
+        int doesNotExist = 2;
+        String status = String.format("OK({0}),\nNOT_IN_STOCK({1}),\nDOES_NOT_EXIST({2})", okToBuy, notInStock, doesNotExist);
+        System.out.println(status);
         return indexesOfBooksToBuy;
+    }
+
+    public List<Book> getBooks() {
+        return bookList;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }
