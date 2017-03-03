@@ -13,7 +13,7 @@ public class InputReader {
         } else {
             input = "ERROR";
         }
-        System.out.println("Scan: "+input);
+        System.out.println("INPUT: "+input);
         return input.toLowerCase();
     }
 
@@ -26,7 +26,7 @@ public class InputReader {
         } else {
             input = -1;
         }
-        System.out.println("Int scan: " + input);
+        System.out.println("INT INPUT: " + input);
         return input;
     }
 }

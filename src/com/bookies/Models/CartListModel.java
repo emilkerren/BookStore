@@ -23,6 +23,7 @@ public class CartListModel implements BookList {
     public boolean add(Book book, int quantity) {
         Item item  = retrieveBookAsItem(book);
         if (quantity >= item.getQuantity()) {
+            System.out.println("Not in stock");
             return false;
         }
 
@@ -41,7 +42,20 @@ public class CartListModel implements BookList {
 
     @Override
     public int[] buy(Book... books) {
-        return new int[0];
+        int notInStock = 0;
+        int ok = 0;
+        int doesNotExist = 0;
+        for (int i = 0; i < books.length; i++) {
+            Item item  = retrieveBookAsItem(books[i]);
+            if (item.getQuantity() == 0) {
+                notInStock++;
+            }
+        }
+        System.out.println("OK("+ok+"),");
+        System.out.println("NOT_IN_STOCK("+notInStock +"),");
+        System.out.println("DOES_NOT_EXIST("+doesNotExist+"),");
+        int[] statuses = {ok, notInStock, doesNotExist};
+        return statuses; //TODO:: return indexes of all that were OK maybe?
     }
 
     public void buyAllItems() {

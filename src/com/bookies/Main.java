@@ -13,10 +13,9 @@ public class Main {
 
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-	    System.out.println("Hello");
-//        scanner = new Scanner(System.in);
+	    System.out.println("Hello, write \"show commands\"  to see available commands");
         DataAccessLayer dataAccessLayer = new DataAccessLayer();
-        BookiesView bookiesView = new BookiesView();
+//        BookiesView bookiesView = new BookiesView();
         BookListModel bookListModel = new BookListModel(dataAccessLayer.getBooks());
         CartListModel cartListModel = new CartListModel();
         BookiesController bookiesController = new BookiesController(bookListModel, cartListModel, null);

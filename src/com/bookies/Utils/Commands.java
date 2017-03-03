@@ -16,6 +16,7 @@ public class Commands {
     public static final String SEARCH_BOOKS = "search books";
     public static final String REMOVE_CART_ITEM = "remove cart item";
     public static final String BUY = "buy";
+    public static final String EXIT = "exit";
 
     public static final List<String> commands = Collections.unmodifiableList(
             new ArrayList<String>() {{
@@ -26,7 +27,8 @@ public class Commands {
                 add(BUY_CART);
                 add(SEARCH_BOOKS +" [book title/autor]");
                 add(REMOVE_CART_ITEM + " [index of 'show cart list item']");
-                add(BUY + "[book]");
+                add(BUY + " [book,book2,book3]");
+                add(EXIT);
             }});
 
 }
