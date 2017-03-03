@@ -6,13 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d7b1a0e-6a65-4a27-91f6-2cc6db507f55" name="Default" comment="commands handling, more methods">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/artifacts/BookStore_jar.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/description.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/project-template.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
+    <list default="true" id="6d7b1a0e-6a65-4a27-91f6-2cc6db507f55" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BookStore/com/bookies/Controllers/BookiesController.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BookStore/com/bookies/DAL/DataAccessLayer.class" afterPath="" />
@@ -24,7 +18,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BookStore/com/bookies/Views/BookiesView$1.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BookStore/com/bookies/Views/BookiesView$2.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/BookStore/com/bookies/Views/BookiesView.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -981,7 +974,7 @@
       <workItem from="1488186611047" duration="5868000" />
       <workItem from="1488312627632" duration="3235000" />
       <workItem from="1488356489366" duration="9816000" />
-      <workItem from="1488395173494" duration="30965000" />
+      <workItem from="1488395173494" duration="30986000" />
     </task>
     <task id="LOCAL-00001" summary="commands handling, more methods">
       <created>1488487849686</created>
@@ -1011,7 +1004,14 @@
       <option name="project" value="LOCAL" />
       <updated>1488548735900</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="commands handling, more methods">
+      <created>1488549311051</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1488549311051</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1047,7 +1047,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77974000" />
+    <option name="totallyTimeSpent" value="77995000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1118,11 +1118,11 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commands handling, more methods" />
     <MESSAGE value="removal of .class files, new commands, updated logic" />
     <MESSAGE value="restructured project layout, added test class" />
     <MESSAGE value="1) logic fixed for adding to cart 2) more test methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="1) logic fixed for adding to cart 2) more test methods" />
+    <MESSAGE value="commands handling, more methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="commands handling, more methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
