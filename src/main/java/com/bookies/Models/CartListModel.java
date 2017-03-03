@@ -22,7 +22,7 @@ public class CartListModel implements BookList {
     @Override
     public boolean add(Book book, int quantity) {
         Item item  = retrieveBookAsItem(book);
-        if (quantity >= item.getQuantity()) {
+        if (quantity > item.getQuantity()) {
             System.out.println("Not in stock");
             return false;
         }
@@ -66,6 +66,7 @@ public class CartListModel implements BookList {
         }
 
         System.out.println("Total price: "+price);
+        itemsInCart.clear();
     }
 
     public void removeItemFromCart(int index) {

@@ -60,10 +60,6 @@ public class BookiesController {
         }
     }
 
-    private Book[] searchBooks(String searchString) {
-        return this.bookiesListModel.list(searchString);
-    }
-
     private List<Book> getBooks() {
         return this.bookiesListModel.getBooks();
     }
@@ -95,7 +91,7 @@ public class BookiesController {
             try {
                 String[] search = command.split("search books ");
                 System.out.println("book to seach:" + search[1]);
-                Book[] foundBooks = searchBooks(search[1]);
+                Book[] foundBooks = this.bookiesListModel.list(search[1]);
                 for (Book foundBook : foundBooks) {
                     System.out.println(foundBook);
                 }
@@ -112,7 +108,7 @@ public class BookiesController {
                 String commandSplit[] = command.split("\\d");
                 String book = commandSplit[1].trim();
 
-                Book[] foundBooks = searchBooks(book);
+                Book[] foundBooks = this.bookiesListModel.list(book);
                 Book chosenBook = chosenBookFromSearchResultQuestion(foundBooks);
                 addToCart(quantity, chosenBook);
             } catch (Exception e) {
@@ -150,7 +146,7 @@ public class BookiesController {
 
                 for (int i = 0; i < bookStrings.size(); i++) {
                     String bookString = bookStrings.get(i).trim();
-                    Book[] tempBooks = searchBooks(bookString);
+                    Book[] tempBooks = this.bookiesListModel.list(bookString);
                     bookList.addAll(Arrays.asList(tempBooks));
                 }
                 Book[] tempArray = new Book[bookList.size()];
@@ -197,7 +193,7 @@ public class BookiesController {
         System.out.println("search author or title: ");
         String scannerStringSearch = InputReader.scan(scanner);
 
-        Book[] foundBooks = searchBooks(scannerStringSearch);
+        Book[] foundBooks = this.bookiesListModel.list(scannerStringSearch);
         if (foundBooks.length >= 1) {
             System.out.println("Found books: ");
             for (Book foundBook : foundBooks) {
