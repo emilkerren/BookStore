@@ -3,6 +3,9 @@
     <output-path>$PROJECT_DIR$/out/artifacts/BookStore_jar</output-path>
     <root id="archive" name="BookStore.jar">
       <element id="module-output" name="BookStore" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
     </root>
   </artifact>
 </component>
