@@ -41,7 +41,7 @@ public class BookiesController {
         System.out.println(succesfullyAddedToCart ? "Items was successfully added to cart" : "Items was not added to cart..Not in stock");
     }
 
-    private void addBookToInventory(Book book, int quantity){
+    private void addBookToInventory(Book book, int quantity) {
         boolean succesfullyAddedToInventory = this.bookiesListModel.add(book, quantity);
         System.out.println(succesfullyAddedToInventory ? "Item was successfully added to inventory" : "Item was not added to inventory..");
     }
@@ -130,7 +130,7 @@ public class BookiesController {
             } catch (Exception e) {
                 System.out.println(UNRECOGNIZED_COMMAND + e.getMessage());
             }
-        } else if(command.startsWith(ADD_TO_INVENTORY)) {
+        } else if (command.startsWith(ADD_TO_INVENTORY)) {
             try {
                 String[] splittedString = command.split(" ");
 
@@ -154,15 +154,13 @@ public class BookiesController {
             } catch (Exception e) {
                 System.out.println(UNRECOGNIZED_COMMAND + e.getMessage());
             }
-        }
-
-        else if(command.equalsIgnoreCase(EXIT)) {
+        } else if (command.equalsIgnoreCase(EXIT)) {
             System.exit(1);
         }
     }
 
     private void buyCart() {
-        this.cartListModel.buyAllItems();
+        bookiesListModel.setItems(cartListModel.buyAllItemsInCart(bookiesListModel.getItems()));
     }
 
     private void showAllBooks() {

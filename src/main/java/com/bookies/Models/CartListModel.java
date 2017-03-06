@@ -55,15 +55,22 @@ public class CartListModel implements BookList {
         return statuses;
     }
 
-    public void buyAllItems() {
+    public List<Item> buyAllItemsInCart(List<Item> items) {
         BigDecimal price = new BigDecimal(0.00);
         for (Book book : itemsInCart) {
+            items.stream().filter(b -> b.getItem().equals(book)).findFirst().get().decreaseQuantity();
             System.out.println("book price: "+book.getPrice());
             price = price.add(new BigDecimal(book.getPrice().doubleValue()));
         }
 
+
+
+//        buy(itemsInCart);
+
         System.out.println("Total price: "+price);
+
         itemsInCart.clear();
+        return items;
     }
 
     public void removeItemFromCart(int index) {

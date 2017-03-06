@@ -20,6 +20,8 @@ public class Item {
         this.quantity = quantity;
     }
 
-
+    public void decreaseQuantity(){
+        this.setQuantity(getQuantity()-1);
+    }
 
 }

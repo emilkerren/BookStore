@@ -98,6 +98,19 @@ public class BookiesTest {
         assertEquals(2, cartListModel.getItemsInCart().size());
     }
 
+    @Test
+    public void should_buy_books_from_cart_and_update_inventory() {
+        addSomeBooksToCart();
+
+        bookiesListModel.setItems(cartListModel.buyAllItemsInCart(bookiesListModel.getItems()));
+
+        assertEquals(0, cartListModel.getItemsInCart().size());
+        assertEquals(14, bookiesListModel.getItems().get(0).getQuantity());
+        assertEquals(0, bookiesListModel.getItems().get(1).getQuantity());
+        assertEquals(4, bookiesListModel.getItems().get(2).getQuantity());
+        assertEquals(19, bookiesListModel.getItems().get(4).getQuantity());
+    }
+
     private void addSomeBooksToCart(){
         List<String> titles = new ArrayList<>();
         titles.add("mastering åäö");

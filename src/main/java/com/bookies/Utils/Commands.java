@@ -21,10 +21,10 @@ public class Commands {
                 add(SHOW_COMMANDS);
                 add(SHOW_BOOKS);
                 add(SHOW_CART);
-                add(ADD_TO_CART+" [number of items] | [book title/autor]");
+                add(ADD_TO_CART+" [number of items] | [book title/author]");
                 add(ADD_TO_INVENTORY+" [number of items] | [book title] | [author] | [price]");
                 add(BUY_CART);
-                add(SEARCH_BOOKS +" [book title/autor]");
+                add(SEARCH_BOOKS +" [book title/author]");
                 add(REMOVE_CART_ITEM + " [index of 'show cart list item']");
                 add(BUY + " [book,book2,book3]");
                 add(EXIT);
