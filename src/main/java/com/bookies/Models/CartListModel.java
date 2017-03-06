@@ -4,6 +4,7 @@ import com.bookies.DAL.DataAccessLayer;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,16 +57,19 @@ public class CartListModel implements BookList {
     }
 
     public List<Item> buyAllItemsInCart(List<Item> items) {
+        Book[] booksArray = new Book[itemsInCart.size()];
+        booksArray = itemsInCart.toArray(booksArray);
+
+        int[] statuses = buy(booksArray);
+        String status = String.format("OK(%1$d),\nNOT_IN_STOCK(%2$d),\nDOES_NOT_EXIST(%3$d)", statuses[0], statuses[1], statuses[2]);
+        System.out.println(status);
+
         BigDecimal price = new BigDecimal(0.00);
         for (Book book : itemsInCart) {
             items.stream().filter(b -> b.getItem().equals(book)).findFirst().get().decreaseQuantity();
             System.out.println("book price: "+book.getPrice());
             price = price.add(new BigDecimal(book.getPrice().doubleValue()));
         }
-
-
-
-//        buy(itemsInCart);
 
         System.out.println("Total price: "+price);
 
