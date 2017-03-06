@@ -62,7 +62,7 @@ public class BookiesTest {
         assertEquals(1, mastering.length);
 
         Book[] fail = bookiesListModel.list("fail");
-        assertEquals(0, fail.length);
+        assertEquals(1, fail.length);
     }
 
     @Test

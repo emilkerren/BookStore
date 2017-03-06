@@ -20,7 +20,6 @@ public class CartListModel implements BookList {
     public boolean add(Book book, int quantity) {
         Item item  = retrieveBookAsItem(book);
         if (quantity > item.getQuantity()) {
-            System.out.println("Not in stock");
             return false;
         }
 
@@ -33,7 +32,7 @@ public class CartListModel implements BookList {
     private Item retrieveBookAsItem(Book book) {
         Item item = DataAccessLayer.getItemList().stream().filter(element->element.getItem() instanceof Book)
 //                .filter(((Book) books -> books.getItem()).equals(this.cartListModel.getItemsInCart()))
-                .filter(element -> element.getItem().equals(book)).findFirst().get();
+                .filter(element -> element.getItem().equals(book)).findFirst().orElse(null);
         return item;
     }
 
@@ -44,15 +43,16 @@ public class CartListModel implements BookList {
         int doesNotExist = 0;
         for (int i = 0; i < books.length; i++) {
             Item item  = retrieveBookAsItem(books[i]);
-            if (item.getQuantity() == 0) {
+            if(item == null) {
+                doesNotExist++;
+            } else if (item.getQuantity() == 0) {
                 notInStock++;
+            } else{
+                ok++;
             }
         }
-        System.out.println("OK("+ok+"),");
-        System.out.println("NOT_IN_STOCK("+notInStock +"),");
-        System.out.println("DOES_NOT_EXIST("+doesNotExist+"),");
         int[] statuses = {ok, notInStock, doesNotExist};
-        return statuses; //TODO:: return indexes of all that were OK maybe?
+        return statuses;
     }
 
     public void buyAllItems() {

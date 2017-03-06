@@ -27,8 +27,13 @@ public class BookListModel implements BookList {
                 foundBooks.add(book);
             }
         }
+        if(foundBooks.size() == 0) {
+            Book failedBook = new Book();
+            foundBooks.add(failedBook);
+        }
         Book[] booksArray = new Book[foundBooks.size()];
         booksArray = foundBooks.toArray(booksArray);
+
         return booksArray;
     }
 

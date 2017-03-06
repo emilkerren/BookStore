@@ -38,7 +38,7 @@ public class BookiesController {
 
     private void addToCart(Book book, int quantity) {
         boolean succesfullyAddedToCart = this.cartListModel.add(book, quantity);
-        System.out.println(succesfullyAddedToCart ? "Items was successfully added to cart" : "Items was not added to cart..");
+        System.out.println(succesfullyAddedToCart ? "Items was successfully added to cart" : "Items was not added to cart..Not in stock");
     }
 
     private void addBookToInventory(Book book, int quantity){
@@ -124,7 +124,9 @@ public class BookiesController {
                 }
                 Book[] tempArray = new Book[bookList.size()];
                 books = bookList.toArray(tempArray);
-                cartListModel.buy(books);
+                int[] statuses = cartListModel.buy(books);
+                String status = String.format("OK(%1$d),\nNOT_IN_STOCK(%2$d),\nDOES_NOT_EXIST(%3$d)", statuses[0], statuses[1], statuses[2]);
+                System.out.println(status);
             } catch (Exception e) {
                 System.out.println(UNRECOGNIZED_COMMAND + e.getMessage());
             }
