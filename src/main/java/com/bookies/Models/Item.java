@@ -1,9 +1,5 @@
 package com.bookies.Models;
 
-
-/**
- * Created by Emil on 2017-02-21.
- */
 public class Item {
     private Object item;
     private int quantity;

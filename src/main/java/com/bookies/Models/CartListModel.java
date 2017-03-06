@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Emil on 2017-02-19.
- */
 public class CartListModel implements BookList {
 
     private List<Book> itemsInCart = new ArrayList<Book>();

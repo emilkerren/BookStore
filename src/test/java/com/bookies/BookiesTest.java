@@ -15,9 +15,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Emil on 2017-03-03.
- */
 public class BookiesTest {
 
     private List<Item> items = new ArrayList<>();

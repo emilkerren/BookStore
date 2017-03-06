@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Emil on 2017-02-18.
- */
 public class DataAccessLayer {
 //    List<Book> bookList = new ArrayList<>();
     private static List<Item> itemList = new ArrayList<>();

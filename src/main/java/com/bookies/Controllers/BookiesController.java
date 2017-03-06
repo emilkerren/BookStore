@@ -4,8 +4,10 @@ import com.bookies.Models.Book;
 import com.bookies.Models.BookListModel;
 import com.bookies.Models.CartListModel;
 import com.bookies.Utils.InputReader;
+import com.bookies.Utils.Utils;
 import com.bookies.Views.BookiesView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,10 +15,6 @@ import java.util.Scanner;
 
 import static com.bookies.Utils.Commands.*;
 
-
-/**
- * Created by Emil on 2017-02-18.
- */
 public class BookiesController {
     private static final String UNRECOGNIZED_COMMAND = "This command is not recognized...Error: ";
     private BookListModel bookiesListModel;
@@ -30,36 +28,6 @@ public class BookiesController {
         this.cartListModel = cartListModel;
     }
 
-    public void runApp() {
-        scanner = new Scanner(System.in);
-        showAllBooks();
-
-        Book[] foundBooks = searchBooksQuestion();
-
-        if (foundBooks.length >= 1) {
-            Book chosenBook = chosenBookFromSearchResultQuestion(foundBooks);
-            int quantity = quantityQuestion();
-            addToCartQuestion(quantity, chosenBook);
-            showCart();
-//            commands();
-        } else {
-            boolean repeat = true;
-            while (repeat) {
-                scanner.reset();
-                System.out.println("close app? y/n");
-                String scanString = InputReader.scan(scanner);
-                if ("y".equalsIgnoreCase(scanString)) {
-                    System.exit(1);
-                } else if ("n".equalsIgnoreCase(scanString)) {
-                    runApp();
-                } else {
-                    System.out.println("you typed something different..try again...");
-                    repeat = true;
-                }
-            }
-        }
-    }
-
     private List<Book> getBooks() {
         return this.bookiesListModel.getBooks();
     }
@@ -68,9 +36,14 @@ public class BookiesController {
         cartListModel.showItemsInCart();
     }
 
-    private void addToCart(int quantity, Book book) {
+    private void addToCart(Book book, int quantity) {
         boolean succesfullyAddedToCart = this.cartListModel.add(book, quantity);
         System.out.println(succesfullyAddedToCart ? "Items was successfully added to cart" : "Items was not added to cart..");
+    }
+
+    private void addBookToInventory(Book book, int quantity){
+        boolean succesfullyAddedToInventory = this.bookiesListModel.add(book, quantity);
+        System.out.println(succesfullyAddedToInventory ? "Item was successfully added to inventory" : "Item was not added to inventory..");
     }
 
     public void commands(String command) {
@@ -105,12 +78,12 @@ public class BookiesController {
                 String[] splittedString = command.split(" ");
 
                 int quantity = Integer.valueOf(splittedString[3]);
-                String commandSplit[] = command.split("\\d");
+                String commandSplit[] = command.split("\\|");
                 String book = commandSplit[1].trim();
 
                 Book[] foundBooks = this.bookiesListModel.list(book);
                 Book chosenBook = chosenBookFromSearchResultQuestion(foundBooks);
-                addToCart(quantity, chosenBook);
+                addToCart(chosenBook, quantity);
             } catch (Exception e) {
                 System.out.println(UNRECOGNIZED_COMMAND + e.getMessage());
             }
@@ -155,6 +128,30 @@ public class BookiesController {
             } catch (Exception e) {
                 System.out.println(UNRECOGNIZED_COMMAND + e.getMessage());
             }
+        } else if(command.startsWith(ADD_TO_INVENTORY)) {
+            try {
+                String[] splittedString = command.split(" ");
+
+                int quantity = Integer.valueOf(splittedString[3]);
+                String commandSplit[] = command.split("\\|");
+
+                String title = Utils.toCamelCase(commandSplit[1].trim());
+                String author = Utils.toCamelCase(commandSplit[2].trim());
+
+                Book newBook = new Book();
+                newBook.setTitle(title.trim());
+                newBook.setAuthor(author.trim());
+
+                String stringPrice = commandSplit[3].trim();
+
+                BigDecimal price = new BigDecimal(stringPrice);
+
+                newBook.setPrice(price);
+                addBookToInventory(newBook, quantity);
+
+            } catch (Exception e) {
+                System.out.println(UNRECOGNIZED_COMMAND + e.getMessage());
+            }
         }
 
         else if(command.equalsIgnoreCase(EXIT)) {
@@ -186,62 +183,5 @@ public class BookiesController {
             return foundBooks[scannerInt];
         }
         return foundBooks[0];
-    }
-
-    private Book[] searchBooksQuestion() {
-//        scanner.reset();
-        System.out.println("search author or title: ");
-        String scannerStringSearch = InputReader.scan(scanner);
-
-        Book[] foundBooks = this.bookiesListModel.list(scannerStringSearch);
-        if (foundBooks.length >= 1) {
-            System.out.println("Found books: ");
-            for (Book foundBook : foundBooks) {
-                System.out.println(foundBook.toString());
-            }
-        } else {
-            scanner.reset();
-            System.out.println("no books found...try again? y/n :");
-
-            String scannerStringYesOrNo = InputReader.scan(scanner);
-
-            if ("y".equalsIgnoreCase(scannerStringYesOrNo)) {
-                searchBooksQuestion();
-            } else if ("n".equalsIgnoreCase(scannerStringYesOrNo)) {
-                System.out.println("search canceled");
-            } else {
-                System.out.println("you typed something different..try again...");
-                searchBooksQuestion();
-            }
-        }
-        return foundBooks;
-    }
-
-    private void addToCartQuestion(int quantity, Book chosenBook) {
-        scanner.reset();
-        System.out.println(quantity >= 2 ? "Add books to cart?" : "Add book to cart?");
-        System.out.println("Write \"y\" to add and \"n\" to keep shopping");
-        String scannerStringYesOrNo = InputReader.scan(scanner);
-        if ("y".equalsIgnoreCase(scannerStringYesOrNo)) {
-            addToCart(quantity, chosenBook);
-        } else if ("n".equalsIgnoreCase(scannerStringYesOrNo)) {
-            System.out.println("book not added to cart");
-        } else {
-            System.out.println("you typed something different..try again...");
-            addToCartQuestion(quantity, chosenBook);
-        }
-    }
-
-    private int quantityQuestion() {
-        scanner.reset();
-        System.out.println("How many would you like to purchase?");
-        int quantity = InputReader.scanInt(scanner);
-        if (quantity != -1) {
-            return quantity;
-        } else {
-            System.out.println("you didn't write a number...try again..");
-            quantityQuestion();
-        }
-        return -1;
     }
 }

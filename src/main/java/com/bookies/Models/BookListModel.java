@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Emil on 2017-02-18.
- */
 public class BookListModel implements BookList {
     private List<Item> items;
     private List<Book> bookList;
@@ -37,9 +34,18 @@ public class BookListModel implements BookList {
 
     @Override
     public boolean add(Book book, int quantity) {
-        List<Book> extendedBookList = new ArrayList<>(bookList);
-        extendedBookList.add(book);
-        return true;
+        int beforeAdd = items.size();
+        Item item = new Item();
+        item.setItem(book);
+        item.setQuantity(quantity);
+        items.add(item);
+        bookList.add(book);
+        int afterAdd = items.size();
+
+        if(afterAdd > beforeAdd)
+            return true;
+        else
+            return false;
     }
 
     @Override
